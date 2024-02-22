@@ -1,11 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.WSA;
-using static UnityEngine.GraphicsBuffer;
+using System.Collections;
 
 public class HangingObstacle : MonoBehaviour
 {
@@ -48,6 +42,7 @@ public class HangingObstacle : MonoBehaviour
 
     //Canvas InputField object
     private GameObject canvasIF;
+    private float inputFieldFadesDelay = 2.0f;
 
     private void Start()
     {
@@ -178,6 +173,7 @@ public class HangingObstacle : MonoBehaviour
     //Dragging with right - only on Y axis 
     void OnMouseOver()
     {
+        StopCoroutine(WaitForSeconds());
         //Canvas Input Field is turn on
         canvasIF.SetActive(true);
 
@@ -302,8 +298,15 @@ public class HangingObstacle : MonoBehaviour
         //Canvas Input Field is turn on
         if (mousePositionScript.mouseDragsObject == false)
         {
-            canvasIF.SetActive(false);
+            StartCoroutine(WaitForSeconds());
         }
+    } 
+    
+    //Input fields fades delay
+    IEnumerator WaitForSeconds()
+    {
+        yield return new WaitForSeconds(inputFieldFadesDelay);
+        canvasIF.SetActive(false);
     }
 
 

@@ -16,6 +16,7 @@ TagManager:
   - WindowObstacle
   - DoorObstacle
   - Panel
+  - GameMusic
   layers:
   - Default
   - TransparentFX

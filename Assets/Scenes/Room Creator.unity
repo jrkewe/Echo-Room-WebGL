@@ -674,6 +674,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNumber: 0
+--- !u!1 &158140365
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 158140366}
+  - component: {fileID: 158140367}
+  m_Layer: 0
+  m_Name: MainManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &158140366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158140365}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 197.48311, y: 517.5786, z: 294.5482}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &158140367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158140365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5fc18715f23354eb3d05385c28e590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorPrefabs: []
+  wallXPrefabs: []
+  wallZPrefabs: []
+  detectorPrefabs: []
+  doorPrefabs: []
+  lightingPrefabs: []
+  ventilationPrefabs: []
+  windowPrefabs: []
 --- !u!1 &168758894
 GameObject:
   m_ObjectHideFlags: 0
@@ -7554,6 +7606,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonNumber: 3
+--- !u!1 &1871571115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1871571116}
+  - component: {fileID: 1871571118}
+  - component: {fileID: 1871571117}
+  m_Layer: 0
+  m_Name: Color Controler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1871571116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871571115}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7713804, y: 1.5078616, z: 5.5130587}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871571117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871571115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732ee45080e8d334082c20bccd5671da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleMaterial: {fileID: 2100000, guid: 41ad18f6c6f4f4b4d982a7c05829f222, type: 2}
+  panelMaterial: {fileID: 2100000, guid: f9062d12403689b4280a6fe9604a5b93, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: 10937962589345049aeb03a014f21893, type: 2}
+  detectorPrefabs: []
+  doorPrefabs: []
+  lightingPrefabs: []
+  ventilationPrefabs: []
+  windowPrefabs: []
+  panelPrefabs: []
+--- !u!114 &1871571118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871571115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d3429b78acee443884a16eab02a06a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleMaterial: {fileID: 0}
+  transparentMaterial: {fileID: 0}
 --- !u!1 &1871774490
 GameObject:
   m_ObjectHideFlags: 0
@@ -8710,3 +8830,5 @@ SceneRoots:
   - {fileID: 352876319}
   - {fileID: 1448294523}
   - {fileID: 273197786}
+  - {fileID: 158140366}
+  - {fileID: 1871571116}

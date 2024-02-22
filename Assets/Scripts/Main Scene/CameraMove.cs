@@ -24,8 +24,8 @@ public class CameraMove : MonoBehaviour
     public bool canRotate = true;
 
     //Reposition camera
-    private Vector3 startPosition = new Vector3(-12,7,-12);
-    private Vector3 startAngle = new Vector3(10,46,0);
+    private Vector3 startPosition = new Vector3(17,11,-6);
+    private Vector3 startAngle = new Vector3(35,-39,0);
     private float fieldOfViev = 46;
     public bool cameraIsRestarted = false;
 

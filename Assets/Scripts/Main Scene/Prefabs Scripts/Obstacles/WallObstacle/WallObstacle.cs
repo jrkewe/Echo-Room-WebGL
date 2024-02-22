@@ -38,6 +38,7 @@ public class WallObstacle : MonoBehaviour
 
     //Canvas InputField object
     private GameObject canvasIF;
+    private float inputFieldFadesDelay = 2.0f;
 
 
     private void Start()
@@ -202,8 +203,9 @@ public class WallObstacle : MonoBehaviour
         mousePositionScript.mouseDragsObject = false;
     }
 
-    private void OnMouseEnter()
+    private void OnMouseOver()
     {
+        StopCoroutine(WaitForSeconds());
         //Canvas Input Field is turn on
         canvasIF.SetActive(true);
     }
@@ -212,7 +214,7 @@ public class WallObstacle : MonoBehaviour
         //Canvas Input Field is turn on
         if (mousePositionScript.mouseDragsObject == false)
         {
-            canvasIF.SetActive(false);
+            StartCoroutine(WaitForSeconds());
         }
     }
 
@@ -266,5 +268,11 @@ public class WallObstacle : MonoBehaviour
         obstacleCollided = false;
     }
 
+    //Input fields fades delay
+    IEnumerator WaitForSeconds()
+    {
+        yield return new WaitForSeconds(inputFieldFadesDelay);
+        canvasIF.SetActive(false);
+    }
 
 }

@@ -17,6 +17,7 @@ public class UserInputManager : MonoBehaviour
     //Mouse position
     private MousePosition mousePositionScript;
 
+
     //Resizing
     public bool objectDetected= false;
     public Vector3 newSize;

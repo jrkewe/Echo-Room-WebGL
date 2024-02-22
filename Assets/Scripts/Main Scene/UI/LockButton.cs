@@ -17,7 +17,7 @@ public class LockButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Wyswietl stan obiektu
+        //Display object state
         mousePositionScript = GameObject.Find("User Input Manager").GetComponent<MousePosition>();
         userInputManagerScript = GameObject.Find("User Input Manager").GetComponent<UserInputManager>();
         button = GetComponent<Button>();

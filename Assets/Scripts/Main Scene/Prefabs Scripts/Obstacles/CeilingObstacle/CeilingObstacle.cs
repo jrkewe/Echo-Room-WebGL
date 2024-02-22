@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class CeilingObstacle : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class CeilingObstacle : MonoBehaviour
 
     //Canvas InputField object
     private GameObject canvasIF;
+    private float inputFieldFadesDelay = 2.0f;
 
     private void Start()
     {
@@ -46,6 +48,7 @@ public class CeilingObstacle : MonoBehaviour
 
         mousePositionScript = GameObject.Find("User Input Manager").GetComponent<MousePosition>();
         pointZeroScript = GameObject.Find("User Input Manager").GetComponent<PointZero>();
+
     }
 
     public void SetPosition()
@@ -220,7 +223,7 @@ public class CeilingObstacle : MonoBehaviour
            }
            else if (distanceBetweenPositionsX < distanceRegardingSizeX || distanceBetweenPositionsZ < distanceRegardingSizeZ) 
            {
-               Debug.Log("Entered wallObstacle");
+               //Debug.Log("Entered wallObstacle");
 
            }
             
@@ -246,6 +249,7 @@ public class CeilingObstacle : MonoBehaviour
 
     private void OnMouseOver()
     {
+        StopCoroutine(WaitForSeconds());
         //Canvas Input Field is turn on
         canvasIF.SetActive(true);
     }
@@ -254,7 +258,14 @@ public class CeilingObstacle : MonoBehaviour
     {
         //Canvas Input Field is turn on
         if (mousePositionScript.mouseDragsObject == false) {
-            canvasIF.SetActive(false);
+            StartCoroutine(WaitForSeconds());
         }
+    }
+
+    //Input fields fades delay
+    IEnumerator WaitForSeconds() 
+    {
+        yield return new WaitForSeconds(inputFieldFadesDelay);
+        canvasIF.SetActive(false);
     }
 }

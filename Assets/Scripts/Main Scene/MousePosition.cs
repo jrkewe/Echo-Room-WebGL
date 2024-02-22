@@ -9,7 +9,7 @@ public class MousePosition : MonoBehaviour
     public static ILogger debugMousePosition = new Logger(Debug.unityLogger.logHandler);
 
     //mouse position in 3D
-    public Camera mainCamera;
+    private Camera mainCamera;
     public Vector3 mousePosition;
 
     //selected object
@@ -28,6 +28,7 @@ public class MousePosition : MonoBehaviour
     {
         //Debugger
         debugMousePosition.logEnabled = false;
+        mainCamera = Camera.main;
     }
 
     private void Update()
