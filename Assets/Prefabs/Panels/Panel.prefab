@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 6399034681680636176}
   - component: {fileID: 7341953937162921427}
   - component: {fileID: 7645945190532664542}
+  - component: {fileID: 7330775637994887561}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Panel
@@ -562,6 +563,18 @@ MonoBehaviour:
   isDraggedRightMouseButton: 0
   relativePosition: {x: 0, y: 0}
   relativeHeight: 0
+--- !u!114 &7330775637994887561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550564920909447757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2edfedfba99d004ab2841338aa02998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2052720495586430192
 GameObject:
   m_ObjectHideFlags: 0
