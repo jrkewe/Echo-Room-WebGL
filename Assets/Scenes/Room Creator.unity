@@ -3162,7 +3162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4445949eb316942428f473a8ad95ad02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 963194227}
   mousePosition: {x: 0, y: 0, z: 0}
   selectedObject: {fileID: 0}
   objectID: 0
@@ -7672,8 +7671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d3429b78acee443884a16eab02a06a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleMaterial: {fileID: 0}
-  transparentMaterial: {fileID: 0}
 --- !u!1 &1871774490
 GameObject:
   m_ObjectHideFlags: 0

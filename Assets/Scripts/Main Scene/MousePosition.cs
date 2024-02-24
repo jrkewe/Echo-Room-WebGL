@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MousePosition : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class MousePosition : MonoBehaviour
     public LayerMask layerMask;
     public bool terrainHItted = false;
 
+    //Scene manager
+    private bool isSceneThree = false;
+
     private void Start() 
     {
         //Debugger
@@ -33,120 +37,125 @@ public class MousePosition : MonoBehaviour
 
     private void Update()
     {
+        isSceneThree = (SceneManager.GetActiveScene().buildIndex == 3);
+
         terrainHItted = false;
-        GetMousePosition();
+        GetMousePosition(); 
+
     }
 
     public bool DetectObject()
     {
-        if (!EventSystem.current.IsPointerOverGameObject(0))
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit raycastHit;
-            if (Physics.Raycast(ray, out raycastHit))
+            if (!EventSystem.current.IsPointerOverGameObject(0) && !isSceneThree && mainCamera!=null)
+            
             {
+                Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit raycastHit;
+                if (Physics.Raycast(ray, out raycastHit))
+                {
 
-                if (raycastHit.collider.gameObject.tag == "WallX")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 0;
-                    debugMousePosition.Log("Wall X");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    debugMousePosition.Log("Position: " + selectedObject.transform.position);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "WallZ")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 1;
-                    debugMousePosition.Log("Wall Z");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "Floor")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 2;
-                    debugMousePosition.Log("Floor");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "DetectorObstacle")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 3;
-                    debugMousePosition.Log("DetectorObstacle");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "DoorObstacle")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 4;
-                    debugMousePosition.Log("DoorObstacle");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "VentilationObstacle")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 5;
-                    debugMousePosition.Log("VentilationObstacle");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "LightingObstacle")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 6;
-                    debugMousePosition.Log("LightingObstacle");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "WindowObstacle")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 7;
-                    debugMousePosition.Log("WindowObstacle");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "Panel")
-                {
-                    selectedObject = raycastHit.collider.gameObject;
-                    objectID = 8;
-                    debugMousePosition.Log("Panel");
-                    debugMousePosition.Log(selectedObject.transform.localScale);
-                    return true;
-                }
-                else if (raycastHit.collider.gameObject.tag == "Terrain")
-                {
-                    if (!EventSystem.current.IsPointerOverGameObject())
+                    if (raycastHit.collider.gameObject.tag == "WallX")
                     {
-                        terrainHItted = true;
-                        
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 0;
+                        debugMousePosition.Log("Wall X");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        debugMousePosition.Log("Position: " + selectedObject.transform.position);
+                        return true;
                     }
-                  
-                    
-                        return false;
-                    
-                }
+                    else if (raycastHit.collider.gameObject.tag == "WallZ")
+                    {
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 1;
+                        debugMousePosition.Log("Wall Z");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        return true;
+                    }
+                    else if (raycastHit.collider.gameObject.tag == "Floor")
+                    {
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 2;
+                        debugMousePosition.Log("Floor");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        return true;
+                    }
+                    else if (raycastHit.collider.gameObject.tag == "DetectorObstacle")
+                    {
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 3;
+                        debugMousePosition.Log("DetectorObstacle");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        return true;
+                    }
+                    else if (raycastHit.collider.gameObject.tag == "DoorObstacle")
+                    {
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 4;
+                        debugMousePosition.Log("DoorObstacle");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        return true;
+                    }
+                    else if (raycastHit.collider.gameObject.tag == "VentilationObstacle")
+                    {
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 5;
+                        debugMousePosition.Log("VentilationObstacle");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        return true;
+                    }
+                    else if (raycastHit.collider.gameObject.tag == "LightingObstacle")
+                    {
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 6;
+                        debugMousePosition.Log("LightingObstacle");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        return true;
+                    }
+                    else if (raycastHit.collider.gameObject.tag == "WindowObstacle")
+                    {
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 7;
+                        debugMousePosition.Log("WindowObstacle");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        return true;
+                    }
+                    else if (raycastHit.collider.gameObject.tag == "Panel")
+                    {
+                        selectedObject = raycastHit.collider.gameObject;
+                        objectID = 8;
+                        debugMousePosition.Log("Panel");
+                        debugMousePosition.Log(selectedObject.transform.localScale);
+                        return true;
+                    }
+                    else if (raycastHit.collider.gameObject.tag == "Terrain")
+                    {
+                        if (!EventSystem.current.IsPointerOverGameObject())
+                        {
+                            terrainHItted = true;
 
+                        }
+
+
+                        return false;
+
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+                }
                 else
                 {
                     return false;
                 }
             }
+
             else
             {
                 return false;
             }
-        }
-
-        else
-        {
-            return false;
-        }
+        
 
     }
 
@@ -161,5 +170,6 @@ public class MousePosition : MonoBehaviour
         }
     }
 
-   
+
+
 }

@@ -30,12 +30,6 @@ public class InstantiationMenu : MonoBehaviour
     {
         choosenButton = menu;
         buttonWasChoosen = true; 
-        
-        if (panelWasChoosen)
-        {
-            //Coroutine - instantiation - wait for enter
-            StartCoroutine(WaitForKeyEnter());
-        }
 
         for (int i = 0; i<numberOfMenus ;i++) 
         {
@@ -48,22 +42,26 @@ public class InstantiationMenu : MonoBehaviour
                 gameObject.transform.GetChild(i).gameObject.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
+
+
+        //Coroutine - instantiation - wait for enter
+        if (panelWasChoosen)
+        {
+            StartCoroutine(WaitForKeyEnter());
+        }
     }
 
     public void PanelInstantiate(GameObject panel)
     {
-        Debug.Log("Wybrano panel");
         panelWasChoosen = true;
         choosenPanel = panel;
         //Input fields reset
-
-       
     } 
 
     IEnumerator WaitForKeyEnter()
     {
         //Insert Instantiation data
-        Debug.Log("Czeka na enter");
+
         while (!Input.GetKeyDown(KeyCode.Return))
         {
             yield return null;
@@ -72,7 +70,6 @@ public class InstantiationMenu : MonoBehaviour
         switch (choosenButton) 
         {
             case 0:
-                Debug.Log("Przycisk 0");
                 float quantityX;
                 float distanceX;
                 bool successQX = float.TryParse(xInstantiationX.text, out quantityX);
@@ -90,7 +87,6 @@ public class InstantiationMenu : MonoBehaviour
                 break;
 
             case 1:
-                Debug.Log("Przycisk 1");
                 float quantityZ;
                 float distanceZ;
                 bool successQZ = float.TryParse(zInstantiationZ.text, out quantityZ);
@@ -109,7 +105,6 @@ public class InstantiationMenu : MonoBehaviour
                 break;
 
             case 2:
-                Debug.Log("Przycisk 2");
                 float mQuantityX;
                 float mDistanceX;
                 float mQuantityZ;
@@ -121,7 +116,7 @@ public class InstantiationMenu : MonoBehaviour
                 if (successMQX && successMDX && successMQZ && successMDZ)
                 {
                     float positionXOfRawZ = choosenPanel.transform.position.x;
-                    for (int i = 0 ; i < mQuantityX - 1 ; i++) //dla x rzedow
+                    for (int i = 0 ; i < mQuantityX - 1 ; i++) 
                     {
                         float realDistanceZ = choosenPanel.transform.localScale.z + mDistanceZ;
                         float realDistanceX = choosenPanel.transform.localScale.x + mDistanceX;
@@ -129,7 +124,6 @@ public class InstantiationMenu : MonoBehaviour
                         if (i==0) {
                             for (int j = 0; j < mQuantityZ - 1; j++)
                             {
-                                Debug.Log("Panele Z: " + j);
                                 float positionZ = choosenPanel.transform.position.z + realDistanceZ * (j + 1);
                                 Vector3 mPositionZ = new Vector3(positionXOfRawZ, choosenPanel.transform.position.y, positionZ);
                                 Instantiate(choosenPanel, mPositionZ, Quaternion.identity);
@@ -144,7 +138,6 @@ public class InstantiationMenu : MonoBehaviour
 
                         for (int j = 0; j < mQuantityZ - 1; j++)
                         {
-                            Debug.Log("Panele Z: " + j);
                             float positionZ = choosenPanel.transform.position.z + realDistanceZ * (j + 1);
                             Vector3 mPositionZ = new Vector3(positionXOfRawZ, choosenPanel.transform.position.y, positionZ);
                             Instantiate(choosenPanel, mPositionZ, Quaternion.identity);
@@ -157,7 +150,6 @@ public class InstantiationMenu : MonoBehaviour
                 break;
 
         }
-
 
         buttonWasChoosen = false;
         panelWasChoosen = false;

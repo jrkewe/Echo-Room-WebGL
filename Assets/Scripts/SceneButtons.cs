@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class SceneButtons : MonoBehaviour
 {
@@ -10,20 +11,29 @@ public class SceneButtons : MonoBehaviour
     private Button sceneButton;
     public int buttonID;
 
-    //Scene switch
+    //Data persistance between scenes
     private MainManager mainManagerScript;
     private MainPanelManager mainPanelManagerScript;
     private Music audioSourceScript;
 
+    //Stop instantiation
+    private UserInputManager userInputManagerScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex != 3) {
+            userInputManagerScript = GameObject.Find("User Input Manager").GetComponent<UserInputManager>();
+            userInputManagerScript.canInstantiatePrefab = false;
+        }
+
         audioSourceScript = GameObject.Find("Audio Source").GetComponent<Music>();
         if (audioSourceScript!=null) {
             audioSourceScript.SetAudioClip(SceneManager.GetActiveScene().buildIndex);
         }
+
         sceneButton = GetComponent<Button>();
-        sceneButton.onClick.AddListener(LoadScene); 
+        sceneButton.onClick.AddListener(LoadScene);
     }
 
     // Update is called once per frame
@@ -47,6 +57,7 @@ public class SceneButtons : MonoBehaviour
                 mainPanelManagerScript.CreateInstance();
             }
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
         }
     }
 }

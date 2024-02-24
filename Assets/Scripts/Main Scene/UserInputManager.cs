@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UserInputManager : MonoBehaviour
@@ -36,27 +37,31 @@ public class UserInputManager : MonoBehaviour
 
     private void Update()
     {
-            if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
             {
                 objectDetected = false;
 
-                //if its object - DetectObject
-                if (mousePositionScript.DetectObject())
+                if (SceneManager.GetActiveScene().buildIndex != 3)
                 {
-                    StopAllCoroutines();
+                    //if its object - DetectObject
+                    if (mousePositionScript.DetectObject())
+                    {
+                        StopAllCoroutines();
 
-                    objectDetected = true;
+                        objectDetected = true;
 
-                //Pobierz state przycisku
-                    StartCoroutine(WaitForResize());
-                    StartCoroutine(WaitForDelete());
-                //Czekaj czy przycisk sie zmieni
-                }
+                        //Pobierz state przycisku
+                        StartCoroutine(WaitForResize());
+                        StartCoroutine(WaitForDelete());
+                        //Czekaj czy przycisk sie zmieni
+                    }
 
-                //if its terrain - InstantiateObject
-                else
-                {
-                    InstantiateObjects();
+                    //if its terrain - InstantiateObject
+                    else
+                    {
+                        InstantiateObjects();
+
+                    }
                 }
             }
     }

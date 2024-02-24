@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CeilingObstacle : MonoBehaviour
 {
@@ -76,6 +77,11 @@ public class CeilingObstacle : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            isFrozeen = true;
+        }
+
         ceilingObstacleCollided = false;
         ceilingObstacleCollidedWithLeftOrRightSide = false;
         ceilingObstacleCollidedWithFrontOrBackSide = false;
@@ -86,10 +92,9 @@ public class CeilingObstacle : MonoBehaviour
         {
             float leftSide = transform.position.z - transform.localScale.z / 2;
             float backSide = transform.position.x - transform.localScale.x / 2;
-            position2D = new Vector2(backSide,leftSide);
+            position2D = new Vector2(backSide, leftSide);
             relativePosition = position2D - pointZeroScript.pointZero;
         }
-
     }
 
     //Dragging with left mouse button
@@ -105,7 +110,7 @@ public class CeilingObstacle : MonoBehaviour
             relativePosition = position2D - pointZeroScript.pointZero;
         }
 
-        if (!isFrozeen && Input.GetMouseButton(0))
+        if (!isFrozeen)
         {
             mousePositionScript.mouseDragsObject = true;
 
@@ -115,21 +120,31 @@ public class CeilingObstacle : MonoBehaviour
             float backBound = pointZeroScript.pointZero.x + (transform.localScale.x / 2);
             float floorLeftBound = pointZeroScript.pointZero.y + (transform.localScale.z / 2);
 
-            //Ceiling obstacle can move above relativePosition(x>0, z>0) - above floor
-            if (relativePosition.x >= 0 && relativePosition.y >= 0 && !ceilingObstacleCollided)
+            //Floor exists
+            if (pointZeroScript.pointZero != Vector2.zero)
             {
-                canGoBack = false;
 
                 //Limit movement to floor surface
-                mousePositionScript.mousePosition.x = Mathf.Clamp(mousePositionScript.mousePosition.x, backBound, frontBound);
-                mousePositionScript.mousePosition.z = Mathf.Clamp(mousePositionScript.mousePosition.z, floorLeftBound, floorRightBound);
-                transform.position = new Vector3(mousePositionScript.mousePosition.x, height, mousePositionScript.mousePosition.z);
+                if ((transform.position.x <= frontBound) && (transform.position.x >= backBound) && (transform.position.z <= floorRightBound) && (transform.position.z >= floorLeftBound))
+                {
+                    canGoBack = false;
+
+                    mousePositionScript.mousePosition.x = Mathf.Clamp(mousePositionScript.mousePosition.x, backBound, frontBound);
+                    mousePositionScript.mousePosition.z = Mathf.Clamp(mousePositionScript.mousePosition.z, floorLeftBound, floorRightBound);
+
+                    transform.position = new Vector3(mousePositionScript.mousePosition.x, transform.position.y, mousePositionScript.mousePosition.z);
+                }
+
+                else if (canGoBack)
+                {
+                    transform.position = new Vector3(mousePositionScript.mousePosition.x, transform.position.y, mousePositionScript.mousePosition.z);
+                }
             }
 
-            //Ceiling obstacle can move anywhere beneath relativePosition(x<0||z<0) - outside floor
-            else if ((relativePosition.x < 0 || relativePosition.y < 0) && canGoBack)
+            //Floor doesnt exist
+            else if (pointZeroScript.pointZero == Vector2.zero)
             {
-                transform.position = new Vector3(mousePositionScript.mousePosition.x + offset.x, height, mousePositionScript.mousePosition.z + offset.z);
+                transform.position = new Vector3(mousePositionScript.mousePosition.x, transform.position.y, mousePositionScript.mousePosition.z);
             }
 
             //Ceiling obstacle hited wall obstacle above floor surface

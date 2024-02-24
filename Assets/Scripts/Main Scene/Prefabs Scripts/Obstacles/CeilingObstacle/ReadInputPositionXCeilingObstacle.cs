@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ReadInputPositionXCeilingObstacle : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class ReadInputPositionXCeilingObstacle : MonoBehaviour
     //Parents
     private GameObject objectParent;
     private CeilingObstacle objectParentScript;
+
+    //Scene manager
+    private bool isSceneThree = false;
 
     private void Start()
     {
@@ -33,9 +37,14 @@ public class ReadInputPositionXCeilingObstacle : MonoBehaviour
 
     private void Update()
     {
+        isSceneThree = (SceneManager.GetActiveScene().buildIndex ==3);
+
         if (mousePositionScript.mouseDragsObject) {
             DisplayPositionOfSelectedObject();
         }
+
+        if (isSceneThree)
+        {
             //if its object - DetectObject
             if (userInputManagerScript.objectDetected && mousePositionScript.selectedObject != null && !mousePositionScript.mouseDragsObject)
             {
@@ -43,6 +52,7 @@ public class ReadInputPositionXCeilingObstacle : MonoBehaviour
 
                 StartCoroutine(WaitForReposition());
             }
+        }
         
     }
 
@@ -52,12 +62,13 @@ public class ReadInputPositionXCeilingObstacle : MonoBehaviour
         //wprowadzaj wymiary
         while (!Input.GetKey(KeyCode.Return))
         {
-            //gdy cos innego klikniete
-            if (Input.GetMouseButton(0) && (mousePositionScript.DetectObject() || mousePositionScript.terrainHItted))
-            {
-                yield return null;
-                StopCoroutine(WaitForReposition()); 
-            }
+                //gdy cos innego klikniete
+                if (Input.GetMouseButton(0) && isSceneThree && (mousePositionScript.DetectObject() || mousePositionScript.terrainHItted))
+                {
+                    yield return null;
+                    StopCoroutine(WaitForReposition());
+                }
+            
             yield return null;
         } 
 
